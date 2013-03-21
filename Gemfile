@@ -9,3 +9,5 @@ gem 'pg'
 gem 'unicorn'
 
 gem "uuid", "~> 2.3.7"
+
+gem 'haml'
