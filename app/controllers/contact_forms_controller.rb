@@ -46,15 +46,15 @@ class ContactFormsController < ApplicationController
           status = 200
         else
           feedback = "error"
-          status = 500
+          status = 200
         end
       else
         feedback = "empty"
         status = 200
       end
     else
-      feedback = nil
-      status = 404
+      feedback = "notfound"
+      status = 200
     end
     post_response(feedback, :text, status)
   end
