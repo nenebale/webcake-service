@@ -12,7 +12,7 @@ class ContactFormsController < ApplicationController
       type = :json
       status = 200
     else
-      if /^.+@.+\..+$/ === params[:email]
+      if /^.+@.+\..+$/ === params[:email] && params[:service_key] == ENV["SERVICE_KEY"]
         customer = Customer.new
         customer.email = params[:email]
         customer.uuid = UUID.new.generate
@@ -26,9 +26,9 @@ class ContactFormsController < ApplicationController
           status = 500
         end
       else
-        data = "wrong email format"
+        data = "300"
         type = :text
-        status = 500
+        status = 200
       end
     end
     post_response(data,type,status)
