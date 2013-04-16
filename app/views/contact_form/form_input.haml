@@ -1,0 +1,10 @@
+- content_for :subject do
+  = @subject
+
+%h2 Neue Nachricht von Ihrem Kontaktformular
+
+- @input.keys.each do |field|
+  %p
+    %strong= field.to_s.capitalize
+    \:
+    %span= @input[field]
