@@ -35,4 +35,29 @@ class CustomersController < ApplicationController
     end
     post_response(response)
   end
+  def show
+    if params[:service_key] == ENV["SERVICE_KEY"]
+      if Customer.exists?(:email => params[:email]) || Customer.exists?(:uuid => params[:uuid])
+        customer = Customer.find_by_email(params[:email]) || Customer.find_by_uuid(params[:uuid])
+        response = {
+          :data => customer.to_json,
+          :type => :json,
+          :status => 200
+        }
+      else
+        response = {
+          :data => "410 Gone - Customer not existing",
+          :type => :text,
+          :status => 410
+        }
+      end
+    else
+      response = {
+        :data => "403 Forbidden",
+        :type => :text,
+        :status => 403
+      }
+    end
+    post_response(response)
+  end
 end
