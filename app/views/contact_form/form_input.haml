@@ -5,6 +5,5 @@
 
 - @input.keys.each do |field|
   %p
-    %strong= field.to_s.capitalize
-    \:
+    %strong= "#{field.to_s.capitalize}:"
     %span= @input[field]
