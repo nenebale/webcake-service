@@ -25,8 +25,8 @@ config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,
   domain:               'webcake.ch',
-  user_name:            ENV['GAMIL_USERNAME'],
-  password:             ENV['GAMIL_PASSWORD'],
+  user_name:            ENV['GMAIL_USERNAME'],
+  password:             ENV['GMAIL_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true  }
 
