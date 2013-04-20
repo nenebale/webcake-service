@@ -1,5 +1,4 @@
 class EmailsController < ApplicationController
-  include FormService::Responder
   def new
     if Customer.exists?(:uuid => params[:uuid])
       customer = Customer.find_by_uuid(params[:uuid])
@@ -35,6 +34,6 @@ class EmailsController < ApplicationController
         :status => 410
       }
     end
-    post_response(response)
+    render Service::Responder.response(response)
   end
 end
