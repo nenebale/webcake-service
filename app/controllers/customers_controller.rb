@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  include FormService::Responder
+  before_filter :authenticate
   def new
     if Customer.exists?(:email => params[:email]) || Customer.exists?(:uuid => params[:uuid])
       response = {
@@ -8,7 +8,7 @@ class CustomersController < ApplicationController
         :status => 409
       }
     else
-      if /^.+@.+\..+$/ === params[:email] && params[:service_key] == ENV["SERVICE_KEY"]
+      if /^.+@.+\..+$/ === params[:email]
         customer = Customer.new
         customer.email = params[:email]
         customer.uuid = UUID.new.generate
@@ -27,37 +27,29 @@ class CustomersController < ApplicationController
         end
       else
         response = {
-          :data => "403 Forbidden",
+          :data => "400 Bad Request - Invalid email address",
           :type => :text,
-          :status => 403
+          :status => 400
         }
       end
     end
-    post_response(response)
+    render Service::Responder.response(response)
   end
   def show
-    if params[:service_key] == ENV["SERVICE_KEY"]
-      if Customer.exists?(:email => params[:email]) || Customer.exists?(:uuid => params[:uuid])
-        customer = Customer.find_by_email(params[:email]) || Customer.find_by_uuid(params[:uuid])
-        response = {
-          :data => customer.to_json,
-          :type => :json,
-          :status => 200
-        }
-      else
-        response = {
-          :data => "410 Gone - Customer not existing",
-          :type => :text,
-          :status => 410
-        }
-      end
+    if Customer.exists?(:email => params[:email]) || Customer.exists?(:uuid => params[:uuid])
+      customer = Customer.find_by_email(params[:email]) || Customer.find_by_uuid(params[:uuid])
+      response = {
+        :data => customer.to_json,
+        :type => :json,
+        :status => 200
+      }
     else
       response = {
-        :data => "403 Forbidden",
+        :data => "410 Gone - Customer not existing",
         :type => :text,
-        :status => 403
+        :status => 410
       }
     end
-    post_response(response)
+    render Service::Responder.response(response)
   end
 end
