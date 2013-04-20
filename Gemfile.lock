@@ -34,6 +34,9 @@ GEM
     haml (4.0.1)
       tilt
     hike (1.2.1)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     journey (1.0.4)
     json (1.7.7)
@@ -46,6 +49,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.7.1)
+    multi_xml (0.5.3)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -99,6 +103,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml
+  httparty
   pg
   rails (= 3.2.12)
   sqlite3
