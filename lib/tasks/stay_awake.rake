@@ -6,7 +6,7 @@ task :ping_sites => :environment do
 end
 
 task :wake_self do
-  puts Service::Pinger.call('http://dev.webcake.ch')
+  puts Service::Pinger.call('http://service.webcake.ch')
 end
 
 task :stay_awake => [:ping_sites, :wake_self] do
