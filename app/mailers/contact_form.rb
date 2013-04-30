@@ -4,7 +4,7 @@ class ContactForm < ActionMailer::Base
   def form_input(customer,input)
     @customer = customer
     @input = input
-    @subject = "Kontaktforumlar - Neue Nachricht"
+    @subject = "Kontaktformular - Neue Nachricht"
     mail(:to => @customer.email, :subject => @subject)
   end
 end
