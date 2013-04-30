@@ -13,7 +13,7 @@ class EmailsController < ApplicationController
             :type => :text,
             :status => 200
           }
-          if params[:redirect_url].blank?
+          if !params[:redirect_url].blank?
             redirect_to params[:redirect_url] and return
           end
         else
